@@ -11,7 +11,7 @@ public class GameInfo {
 	private boolean[] playerSuccessFlag;
     private boolean[] playerChanceFlag;
 	private Object lock1;
-    
+    private int numTickets;
     private static GameInfo  gameInfo= null;
 
     private GameInfo() throws IOException{
@@ -28,6 +28,9 @@ public class GameInfo {
                 System.out.println("Enter a valid number!");
             }
         }
+
+        
+        numTickets =  3;
         playerChanceFlag = new boolean[numPlayers];
         playerSuccessFlag = new boolean[numPlayers];
         announcedNumber = 0;
@@ -104,7 +107,8 @@ public class GameInfo {
     public int getPlayerNums() {
         return this.numPlayers;
     }
-    // public ArrayList<Integer> getModeratorTickets() {
-    //     return moderatorTickets;
-    // }
+    
+    public int getTicketNums() {
+        return this.numTickets;
+    }
 }

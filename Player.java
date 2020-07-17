@@ -4,28 +4,20 @@ public class Player implements Runnable {
     private int id; // Player
     private GameInfo gameInfo;
     private int totalNosFound;
-    private final static int NUM_TICKETS = 3;
+    // private int numTickets = gameInfo.getTicketNums();
+    private static final int  NUM_TICKETS = 3;
     private HashSet<Integer> numsDone;
-    private int[] ticket = new int[NUM_TICKETS]; // GETTER ADD
+    // private TicketBuild tickets;
+    private int ticket[];
 
     public Player(GameInfo gameInfo, int id) {
         this.id = id;
         this.gameInfo = gameInfo;
         this.totalNosFound = 0;
-
-        // make tickets -->use builder pattern for this
-        for (int i = 0; i < NUM_TICKETS; i++) {
-            int num = generateTicketnum(50, 1);
-            ticket[i] = num;
-        }
+        Ticket ticketBuild = new TicketBuild(NUM_TICKETS);
+        ticket = ticketBuild.getTicket();      
+        printPlayerTickets();    
         numsDone = new HashSet<>();
-        printPlayerTickets();
-    }
-
-    public static int generateTicketnum(int max, int min) {
-        Random rand = new Random();
-        int num = rand.nextInt((max - min) + 1) + min;
-        return num;
     }
 
     private void printPlayerTickets() {
