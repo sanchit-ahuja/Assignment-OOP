@@ -1,8 +1,12 @@
 public class Play {
-    
+
     public static void main(String[] args) {
+
+       
+
         GameInfo gameInfo = GameInfo.getInstance();
-        int numPlayers = gameInfo.n;
+
+        int numPlayers = gameInfo.getPlayerNums();
         Player[] players = new Player[numPlayers];
         
         for(int i = 0;i<players.length;i++) {

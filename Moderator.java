@@ -5,13 +5,12 @@ public class Moderator implements Runnable {
     private GameInfo gameInfo;
     private static final int GEN_TICKETS = 70;
     private Player[] players;
-
+    private int noAnnounced = 0;
     public Moderator(GameInfo gameInfo, Player[] players) {
         this.gameInfo = gameInfo;
         this.players = players;
     }
 
-    private int noAnnounced = 0;
     private int totalNumsAnnounced = 0;
     
     public static int generateTicketnum(int max, int min) {

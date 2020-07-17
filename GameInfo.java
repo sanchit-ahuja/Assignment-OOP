@@ -1,27 +1,51 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 public class GameInfo {
     
     private int announcedNumber;
-    public int n;	 
+    private int numPlayers;	 
 	private boolean gameCompleteFlag;
 	private boolean noAnnouncedFlag;
 	private boolean[] playerSuccessFlag;
     private boolean[] playerChanceFlag;
 	private Object lock1;
     
-    private static GameInfo  gameInfo= new GameInfo();
+    private static GameInfo  gameInfo= null;
 
-    private GameInfo() {
+    private GameInfo() throws IOException{
+        InputStreamReader isr = new InputStreamReader(System.in);
+        BufferedReader bfr = new BufferedReader(isr);
+        boolean valid = false;
+        while(!valid) {
+            try {
+                System.out.println("Enter the number of Players ");
+                numPlayers = Integer.parseInt(bfr.readLine());
+                valid = true;
+            }
+            catch (NumberFormatException e) {
+                System.out.println("Enter a valid number!");
+            }
+        }
+        playerChanceFlag = new boolean[numPlayers];
+        playerSuccessFlag = new boolean[numPlayers];
         announcedNumber = 0;
-        n = 3;
         gameCompleteFlag = false;
         noAnnouncedFlag = false;
-        playerChanceFlag = new boolean[n];
-        playerSuccessFlag = new boolean[n];
         lock1 = new Object();
-    
     }
 
     public static GameInfo getInstance() {
+        synchronized(GameInfo.class) {
+            if(gameInfo == null) {
+                try {
+                    gameInfo = new GameInfo();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
         return gameInfo;
     }
 
@@ -66,6 +90,7 @@ public class GameInfo {
         this.playerChanceFlag = playerChanceFlag;
     }
 
+
     public boolean getGameCompleteFlag() {
         return gameCompleteFlag;
     }
@@ -73,6 +98,12 @@ public class GameInfo {
         this.gameCompleteFlag = gameCompleteFlag;
     }
 
+    public void setPlayerNums(int n) {
+        this.numPlayers = n;
+    }
+    public int getPlayerNums() {
+        return this.numPlayers;
+    }
     // public ArrayList<Integer> getModeratorTickets() {
     //     return moderatorTickets;
     // }
