@@ -5,6 +5,7 @@ public class TicketBuild implements Ticket {
 
     private int ticketNums;
     private int ticket[];
+    
     public TicketBuild(int ticketNums) {
             this.ticketNums = ticketNums;
             ticket = new int[ticketNums];
