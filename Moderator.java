@@ -89,8 +89,7 @@ public class Moderator implements Runnable {
 
                 else {
                     System.out.println("Player " + (playerIndexWon+1) + " won! " );
-                    this.finalTicketsMarked();
-                    System.exit(0);
+                    gameInfo.setGameCompleteFlag(true);
                     break;
                 }
             }
@@ -100,8 +99,8 @@ public class Moderator implements Runnable {
             this.finalTicketsMarked();
 
             if(!playerWon) {
+                gameInfo.setGameCompleteFlag(true);
                 System.out.println("No one won this round ");
-                System.exit(0);
             }
         }
     }

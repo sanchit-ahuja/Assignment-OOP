@@ -47,7 +47,7 @@ public class Player implements Runnable {
             boolean[] getPlayerSuccessFlag = gameInfo.getplayerSuccessFlag();
             while (!gameInfo.getGameCompleteFlag()) {
 
-                while (!gameInfo.getNoAnnouncedFlag() || getPlayerChanceFlag[this.id]) {
+                while (!gameInfo.getNoAnnouncedFlag() || getPlayerChanceFlag[this.id] &&!gameInfo.getGameCompleteFlag()) {
                     try {
                         gameInfo.getLock1().wait();
                     } catch (InterruptedException e) {
