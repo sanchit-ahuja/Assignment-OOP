@@ -14,18 +14,27 @@ public class GameInfo {
     private int numTickets;
     private static GameInfo  gameInfo= null;
 
-    private GameInfo() throws IOException{
+    private GameInfo() throws IOException {
         InputStreamReader isr = new InputStreamReader(System.in);
         BufferedReader bfr = new BufferedReader(isr);
         boolean valid = false;
         while(!valid) {
             try {
+
                 System.out.println("Enter the number of Players ");
                 numPlayers = Integer.parseInt(bfr.readLine());
-                valid = true;
+                if(numPlayers<=0) {
+                    throw new PositiveNumberException("Enter a positive number! FFF ");
+                }
+                else {
+                    valid = true;
+                }
             }
             catch (NumberFormatException e) {
                 System.out.println("Enter a valid number!");
+            }
+            catch(PositiveNumberException p) {
+                System.out.println("Enter a positive number! ");
             }
         }
 
