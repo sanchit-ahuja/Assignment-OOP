@@ -1,9 +1,6 @@
 public class Play {
 
     public static void main(String[] args) {
-
-       
-
         GameInfo gameInfo = GameInfo.getInstance();
 
         int numPlayers = gameInfo.getPlayerNums();

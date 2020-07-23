@@ -3,7 +3,7 @@ import java.util.*;
 public class Moderator implements Runnable {
 
     private GameInfo gameInfo;
-    private static final int GEN_TICKETS = 70;
+    private static final int GEN_TICKETS = 10;
     private Player[] players;
     private int noAnnounced = 0;
     public Moderator(GameInfo gameInfo, Player[] players) {
@@ -11,7 +11,7 @@ public class Moderator implements Runnable {
         this.players = players;
     }
 
-    private int totalNumsAnnounced = 0;
+    private int totalNumsAnnounced = 0; 
     
     public static int generateTicketnum(int max, int min) {
         Random rand = new Random();
@@ -40,7 +40,6 @@ public class Moderator implements Runnable {
         synchronized (gameInfo.getLock1()) {
             boolean playerWon = false;
             while (this.totalNumsAnnounced < GEN_TICKETS) {
-                // boolean playerSuccessFlag[] = gameInfo.getPlayerSuccessFlag();
                 boolean playerSuccessFlag[] = gameInfo.getplayerSuccessFlag();
                 boolean playerChanceFlag[] = gameInfo.getplayerChanceFlag();
                 int playerIndexWon = 0;
@@ -66,7 +65,7 @@ public class Moderator implements Runnable {
                     this.totalNumsAnnounced++;
 
                     try {
-                        Thread.sleep(100);
+                        Thread.sleep(500);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -89,6 +88,8 @@ public class Moderator implements Runnable {
 
                 else {
                     System.out.println("Player " + (playerIndexWon+1) + " won! " );
+                    System.out.println();
+                    System.out.println("Total tickets generated " + (this.totalNumsAnnounced));
                     gameInfo.setGameCompleteFlag(true);
                     break;
                 }

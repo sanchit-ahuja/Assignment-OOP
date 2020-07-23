@@ -10,8 +10,7 @@ public class GameInfo {
 	private boolean noAnnouncedFlag;
 	private boolean[] playerSuccessFlag;
     private boolean[] playerChanceFlag;
-	private Object lock1;
-    private int numTickets;
+	private Object lock1; 
     private static GameInfo  gameInfo= null;
 
     private GameInfo() throws IOException {
@@ -24,12 +23,13 @@ public class GameInfo {
                 System.out.println("Enter the number of Players ");
                 numPlayers = Integer.parseInt(bfr.readLine());
                 if(numPlayers<=0) {
-                    throw new PositiveNumberException("Enter a positive number! FFF ");
+                    throw new PositiveNumberException("Enter a positive number! ");
                 }
                 else {
                     valid = true;
                 }
             }
+            
             catch (NumberFormatException e) {
                 System.out.println("Enter a valid number!");
             }
@@ -39,7 +39,6 @@ public class GameInfo {
         }
 
         
-        numTickets =  3;
         playerChanceFlag = new boolean[numPlayers];
         playerSuccessFlag = new boolean[numPlayers];
         announcedNumber = 0;
@@ -117,7 +116,4 @@ public class GameInfo {
         return this.numPlayers;
     }
     
-    public int getTicketNums() {
-        return this.numTickets;
-    }
 }

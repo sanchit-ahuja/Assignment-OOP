@@ -4,10 +4,9 @@ public class Player implements Runnable {
     private int id; // Player
     private GameInfo gameInfo;
     private int totalNosFound;
-    // private int numTickets = gameInfo.getTicketNums();
-    private static final int  NUM_TICKETS = 3;
+    private static final int  NUM_TICKETS = 10;
+    private static final int WIN_TICKETS = 3;
     private HashSet<Integer> numsDone;
-    // private TicketBuild tickets;
     private int ticket[];
 
     public Player(GameInfo gameInfo, int id) {
@@ -60,14 +59,13 @@ public class Player implements Runnable {
                     for (int i = 0; i < NUM_TICKETS; i++) {
                         if (gameInfo.getAnnouncedNumber() == ticket[i] && !numsDone.contains(i)) {
                             this.totalNosFound++;
-                            // System.out.println(this.totalNosFound + "TOTAL STRIKED " + this.id);
                             numsDone.add(i);
                             break;
                         }
                     }
                 }
 
-                if (this.totalNosFound == NUM_TICKETS) {
+                if (this.totalNosFound == WIN_TICKETS) {
                     getPlayerSuccessFlag[this.id] = true;
                     gameInfo.setplayerSuccessFlag(getPlayerSuccessFlag);
                 }
